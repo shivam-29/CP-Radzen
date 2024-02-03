@@ -1,0 +1,42 @@
+﻿@page "/CustomerList"
+@using CP.Shared
+@inject HttpClient Http
+<RadzenCard class="my-4" style="display: flex; align-items: center; gap: 0.5rem">
+    <div style="white-space:nowrap; margin-right: 16px">Density:</div>
+    <RadzenSelectBar @bind-Value="@Density" TextProperty="Text" ValueProperty="Value"
+                     Data="@(Enum.GetValues(typeof(Density)).Cast<Density>().Select(t => new { Text = $"{t}", Value = t }))" Size="ButtonSize.Small" />
+</RadzenCard>
+<RadzenDataGrid Data="@Customers" TItem="Customer" FilterMode="FilterMode.Simple" Density="@Density"
+                AllowPaging="true" AllowSorting="true"
+                AllowGrouping="false" AllowVirtualization="false" AllowColumnResize="true" AllowColumnReorder="true"
+                AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                PagerHorizontalAlign="HorizontalAlign.Center" ShowPagingSummary="true" AllowColumnPicking="false" PageSizeOptions="@pageSizeOptions" IsLoading=@isLoading>
+    <Columns>
+        <RadzenDataGridColumn TItem="Customer" Property="Id" Title="Id" />
+        <RadzenDataGridColumn TItem="Customer" Property="FirstName" Title="FirstName" />
+        <RadzenDataGridColumn TItem="Customer" Property="LastName" Title="LastName" />
+        <RadzenDataGridColumn TItem="Customer" Property="Email" Title="Email" />
+        <RadzenDataGridColumn TItem="Customer" Property="AddressId" Title="AddressId" />
+        <RadzenDataGridColumn TItem="Customer" Property="Street" Title="Street" />
+        <RadzenDataGridColumn TItem="Customer" Property="City" Title="City" />
+        <RadzenDataGridColumn TItem="Customer" Property="State" Title="State" />
+        <RadzenDataGridColumn TItem="Customer" Property="ZipCode" Title="ZipCode" />
+        <RadzenDataGridColumn TItem="Customer" Property="Country" Title="Country" />
+    </Columns>
+
+
+</RadzenDataGrid>
+
+@code {
+    Density Density = Density.Default;
+    IEnumerable<int> pageSizeOptions = new int[] { 10, 25, 50, 100 };
+    IEnumerable<Customer> Customers = Enumerable.Empty<Customer>();
+    bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        Customers = await Http.GetFromJsonAsync<List<Customer>>("Portal/Customers");
+        isLoading = false;
+    }
+}

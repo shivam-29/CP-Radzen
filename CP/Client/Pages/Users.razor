@@ -1,0 +1,55 @@
+﻿@page "/UserList"
+@using CP.Shared
+@inject HttpClient Http
+<RadzenCard class="my-4" style="display: flex; align-items: center; gap: 0.5rem">
+    <div style="white-space:nowrap; margin-right: 16px">Density:</div>
+    <RadzenSelectBar @bind-Value="@Density" TextProperty="Text" ValueProperty="Value"
+                     Data="@(Enum.GetValues(typeof(Density)).Cast<Density>().Select(t => new { Text = $"{t}", Value = t }))" Size="ButtonSize.Small" />
+</RadzenCard>
+<RadzenDataGrid Data="@UserList" TItem="User" FilterMode="FilterMode.Simple" Density="@Density"
+                AllowPaging="true" AllowSorting="true"
+                AllowGrouping="false" AllowVirtualization="false" AllowColumnResize="true" AllowColumnReorder="true"
+                AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                PagerHorizontalAlign="HorizontalAlign.Center" ShowPagingSummary="true" AllowColumnPicking="false" PageSizeOptions="@pageSizeOptions" IsLoading=@isLoading>
+    <Columns>
+        <RadzenDataGridColumn TItem="User" Property="Role" Title="Role" />
+        <RadzenDataGridColumn TItem="User" Property="Id" Title="Id" />
+        <RadzenDataGridColumn TItem="User" Property="FirstName" Title="FirstName" />
+        <RadzenDataGridColumn TItem="User" Property="LastName" Title="LastName" />
+        <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" />
+        <RadzenDataGridColumn TItem="User" Property="IsAdmin" Title="IsAdmin">
+            <Template Context="User">
+                <RadzenBadge Variant="Variant.Text" BadgeStyle="BadgeStyle.Success" IsPill=true Text=@($"Admin") Class="ml-2" Visible=User.IsAdmin />
+                <RadzenBadge Variant="Variant.Text" BadgeStyle="BadgeStyle.Danger" IsPill=true Text=@($"Non Admin") Class="ml-2" Visible=!User.IsAdmin />
+            </Template>
+
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="User" Property="IsActive" Title="IsActive" >
+            <Template Context="User">
+                <RadzenBadge Variant="Variant.Text" BadgeStyle="BadgeStyle.Success" Text=@($"Active") Class="ml-2" Visible=User.IsActive />
+                <RadzenBadge Variant="Variant.Text" BadgeStyle="BadgeStyle.Danger" Text=@($"InActive") Class="ml-2" Visible=!User.IsActive />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="User" Property="Street" Title="Street" />
+        <RadzenDataGridColumn TItem="User" Property="City" Title="City" />
+        <RadzenDataGridColumn TItem="User" Property="State" Title="State" />
+        <RadzenDataGridColumn TItem="User" Property="ZipCode" Title="ZipCode" />
+        <RadzenDataGridColumn TItem="User" Property="Country" Title="Country" />
+    </Columns>
+
+
+</RadzenDataGrid>
+
+@code {
+    Density Density = Density.Default;
+    IEnumerable<int> pageSizeOptions = new int[] { 10, 25, 50, 100 };
+    IEnumerable<User> UserList = Enumerable.Empty<User>();
+    bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        UserList = await Http.GetFromJsonAsync<List<User>>("Portal/Users");
+        isLoading = false;
+    }
+}

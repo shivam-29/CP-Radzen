@@ -1,0 +1,224 @@
+﻿@page "/customer/new"
+@using CP.Shared
+<RadzenContent Container="main">
+    <ChildContent>
+        <RadzenTabs TabPosition="TabPosition.Left">
+            <Tabs>
+                <RadzenTabsItem Text="General">
+                    <RadzenCard>
+                        <div class="row mb-2">
+                            <div class="col-md-3 ">
+                                <RadzenLabel Text="Request Type" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenDropDown TValue="RequestType" AllowClear=true Multiple=false Data="@RequestTypes" class="form-control" />
+
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <RadzenLabel Text="Change Type" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenDropDown TValue="RequestType" AllowClear=true Multiple=false Data="@RequestTypes" class="form-control" />
+
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <RadzenLabel Text="FEID" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenTextBox Placeholder="Enter FEID" class="form-control" />
+
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <RadzenLabel Text="Oracle Account" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenTextBox class="form-control" />
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <RadzenLabel Text="Comments" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenTextArea Rows="2" class="form-control" />
+                            </div>
+                        </div>
+
+                    </RadzenCard>
+                </RadzenTabsItem>
+                <RadzenTabsItem Text="Delivery">
+                    <RadzenCard>
+                        <div class="row mb-2">
+                            <div class="col-md-3 ">
+                                <RadzenLabel Text="Amount Requested" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenNumeric TValue="int" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <RadzenLabel Text="Performance Parts Sales Order" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenTextBox Placeholder="Enter " class="form-control" />
+
+
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <RadzenLabel Text="Sample Input" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenTextBox Placeholder="Enter " class="form-control" />
+
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <RadzenLabel Text="Sample Input" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenTextBox Placeholder="Enter " class="form-control" />
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-3 ">
+                                <RadzenLabel Text="Status" />
+
+                            </div>
+                            <div class="col-md-5">
+                                <RadzenDropDown TValue="Status" AllowClear=true Multiple=false Data="@Statuses" class="form-control" />
+
+                            </div>
+                        </div>
+
+                    </RadzenCard>
+
+                </RadzenTabsItem>
+                <RadzenTabsItem Text="Address">
+                    <RadzenCard>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row mb-2">
+                                    <div class="col-md-3">
+                                        <RadzenLabel Text="street" />
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <RadzenTextBox Placeholder="Enter FEID" class="form-control" />
+
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-3">
+                                        <RadzenLabel Text="City" />
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <RadzenTextBox class="form-control" />
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-3">
+                                        <RadzenLabel Text="State" />
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <RadzenTextBox class="form-control" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row mb-2">
+                                    <div class="col-md-3">
+                                        <RadzenLabel Text="ZipCode" />
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <RadzenTextBox Placeholder="Enter " class="form-control" />
+
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-3">
+                                        <RadzenLabel Text="Country" />
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <RadzenTextBox class="form-control" />
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-3">
+                                        <RadzenLabel Text="State" />
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <RadzenTextBox class="form-control" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </RadzenCard>
+
+                </RadzenTabsItem>
+                <RadzenTabsItem Text="Invoice" />
+                <RadzenTabsItem Text="Internal" />
+                <RadzenTabsItem Text="Attachment">
+                    <RadzenCard>
+                        <RadzenUpload>
+
+                        </RadzenUpload>
+                    </RadzenCard>
+                </RadzenTabsItem>
+                <RadzenTabsItem Text="Others" />
+
+            </Tabs>
+        </RadzenTabs>
+    </ChildContent>
+</RadzenContent>
+
+@code
+{
+    IEnumerable<RequestType> RequestTypes = Enumerable.Empty<RequestType>();
+    IEnumerable<Status> Statuses = Enumerable.Empty<Status>();
+    CustomerRequestModel customerRequest = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        RequestTypes = Enum.GetValues(typeof(RequestType)).Cast<RequestType>().ToList();
+        Statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
+    }
+
+}

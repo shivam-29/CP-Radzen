@@ -1,0 +1,31 @@
+﻿
+<RadzenPanelMenu>
+    <RadzenPanelMenuItem Text="Home" Path="/" Icon="home" />
+    <RadzenPanelMenuItem Text="Tasks" Icon="task" Path="/workList" />
+    <RadzenPanelMenuItem Text="Customer" Icon="people">
+        <RadzenPanelMenuItem Text="New" Icon="group_add" Path="/customer/new" />
+        <RadzenPanelMenuItem Text="Search" Icon="person_search" Path="/requests" />
+    </RadzenPanelMenuItem>
+    <RadzenPanelMenuItem Text="Vendor" Icon="supervisor_account">
+        <RadzenPanelMenuItem Text="New" Icon="person_add_alt" Path="/vendor/new" />
+        <RadzenPanelMenuItem Text="Search" Icon="person_search" Path="/VendorList" />
+    </RadzenPanelMenuItem>
+    <RadzenPanelMenuItem Text="Admin" Icon="manage_accounts">
+        <RadzenPanelMenuItem Text="Users" Icon="group" Path="/UserList" />
+    </RadzenPanelMenuItem>
+    <RadzenPanelMenuItem Text="Counter" Path="/counter" />
+    <RadzenPanelMenuItem Text="Fetch data" Path="/fetchdata" />
+</RadzenPanelMenu>
+
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
