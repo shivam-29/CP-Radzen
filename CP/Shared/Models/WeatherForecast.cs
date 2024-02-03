@@ -1,4 +1,4 @@
-namespace CP.Shared;
+namespace CP.Shared.Models;
 
 public class WeatherForecast
 {

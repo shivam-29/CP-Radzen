@@ -1,4 +1,4 @@
-﻿namespace CP.Shared;
+﻿namespace CP.Shared.Models;
 public class Customer : BaseUser
 {
     public CustomerType CustomerType { get; set; }

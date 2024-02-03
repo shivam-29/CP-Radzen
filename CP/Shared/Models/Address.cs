@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CP.Shared;
+namespace CP.Shared.Models;
 public class Address
 {
     public int AddressId { get; set; }

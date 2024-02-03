@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CP.Shared;
+namespace CP.Shared.Models;
 public class Work
 {
     [Key]
@@ -12,7 +12,7 @@ public class Work
 
     public RequestType ChangeType { get; set; }
 
-    public string RepresentativeName { get; set; }=string.Empty;
+    public string RepresentativeName { get; set; } = string.Empty;
 
 
     public string ReviewerName { get; set; } = string.Empty;
@@ -29,15 +29,15 @@ public class Work
 
 public enum RequestType
 {
-    New=1,
-    Old=2
+    New = 1,
+    Old = 2
 }
 
 public enum Status
 {
     Open = 1,
-    InProgress= 2,
+    InProgress = 2,
     Closed = 3,
-    Cancelled =4
+    Cancelled = 4
 }
 

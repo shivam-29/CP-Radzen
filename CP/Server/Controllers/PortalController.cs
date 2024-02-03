@@ -1,7 +1,8 @@
 ﻿using Bogus;
 using CP.Server.Data;
 using CP.Server.Helpers;
-using CP.Shared;
+using CP.Shared.Helpers;
+using CP.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

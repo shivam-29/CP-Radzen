@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CP.Shared;
+namespace CP.Shared.Helpers;
 public class PagingParameters
 {
     public int PageNumber { get; set; } = 1;

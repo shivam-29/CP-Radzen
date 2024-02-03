@@ -1,7 +1,7 @@
-﻿namespace CP.Shared;
+﻿namespace CP.Shared.Models;
 public class User : BaseUser
 {
-   
+
     public bool IsAdmin { get; set; }
     public bool IsActive { get; set; } = true;
 

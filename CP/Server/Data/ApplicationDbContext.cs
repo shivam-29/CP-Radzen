@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using CP.Server.Helpers;
-using CP.Shared;
+using CP.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CP.Server.Data;

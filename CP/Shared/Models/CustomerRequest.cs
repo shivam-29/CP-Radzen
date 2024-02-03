@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CP.Shared;
-public class CustomerRequestModel 
+namespace CP.Shared.Models;
+public class CustomerRequestModel
 {
     public string MDMId { get; set; }
     [Key]
@@ -78,6 +78,6 @@ public class CustomerRequestModel
     public int ServicePriority { get; set; } = 1;
     public int ServiceRespTime { get; set; } = 1;
     public int TelephoneRespTime { get; set; } = 1;
-   
-  
+
+
 }
