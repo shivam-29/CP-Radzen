@@ -1,5 +1,4 @@
 ﻿@page "/customer/new"
-@using CP.Shared
 <RadzenContent Container="main">
     <ChildContent>
         <RadzenTabs TabPosition="TabPosition.Left">
@@ -219,6 +218,8 @@
     {
         RequestTypes = Enum.GetValues(typeof(RequestType)).Cast<RequestType>().ToList();
         Statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
+
+        await base.OnInitializedAsync();
     }
 
 }

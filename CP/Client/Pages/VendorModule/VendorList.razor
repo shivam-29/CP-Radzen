@@ -1,5 +1,4 @@
 ﻿@page "/VendorList"
-@using CP.Shared
 @inject HttpClient Http
 <RadzenCard class="my-4" style="display: flex; align-items: center; gap: 0.5rem">
     <div style="white-space:nowrap; margin-right: 16px">Density:</div>
@@ -15,7 +14,7 @@
         <RadzenDataGridColumn TItem="Customer" Width="50px" Sortable="false" Filterable="false" Groupable="false" Pickable="false">
             <HeaderTemplate>
                 <RadzenCheckBox TriState="false" TValue="bool" Value="@(Customers.Any(i => selectedCustomer != null && selectedCustomer.Contains(i)))"
-                                Change="@(args => selectedCustomer = args ? Customers.ToList() : null)" />
+                                Change="@(args => selectedCustomer = args ? Customers.ToList() : new List<Customer>())" />
             </HeaderTemplate>
             <Template Context="customer">
                 <RadzenCheckBox TriState="false" TValue="bool" Change="@(args=>RemoveObjectFromList(args,customer))" Value="@(selectedCustomer != null && selectedCustomer.Contains(customer))" />
@@ -64,6 +63,8 @@
             selectedCustomer ??= new List<Customer>();
             selectedCustomer.Add(custo);
         }
+
+        await Task.CompletedTask;
 
     }
 }

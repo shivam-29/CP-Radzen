@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using CP.Shared;
+using CP.Shared.Models;
 
 namespace CP.Server.Helpers;
 

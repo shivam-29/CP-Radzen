@@ -1,6 +1,6 @@
 ﻿
 using Bogus;
-using CP.Shared;
+using CP.Shared.Models;
 using System;
 using System.Collections.Generic;
 

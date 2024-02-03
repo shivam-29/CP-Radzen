@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CP.Shared;
-public class BaseUser :Address
+namespace CP.Shared.Models;
+public class BaseUser : Address
 {
     [Key]
     public Guid Id { get; set; }

@@ -1,4 +1,4 @@
-using CP.Shared;
+using CP.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CP.Server.Controllers;
