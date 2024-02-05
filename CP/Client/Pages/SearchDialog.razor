@@ -1,0 +1,88 @@
+﻿@page "/search"
+@inherits ComponentBase
+
+<RadzenContent Container="main" >
+    <ChildContent>
+        <div class="row text-start" >
+            <div class="col-12">
+                <div class="row mb-1">
+                    <RadzenLabel Text="Customer Name" class="text-start " Style="outline:none" />
+                     <RadzenTextBox Placeholder="Enter Customer Name" class="form-control" />
+                </div>
+                <div class="row mb-1">
+                    <RadzenLabel Text="Address Line 1" class="text-start " />
+                        <RadzenTextBox Placeholder="Address Line 1" class="form-control" />
+                   
+                </div>
+                <div class="row mb-1">
+                    <RadzenLabel Text="Address Line 2" class="text-start " />
+                        <RadzenTextBox Placeholder="Address Line 2" class="form-control" />
+
+                </div>
+                <div class="row mb-1">
+                    <RadzenLabel Text="City" class="text-start " />
+                        <RadzenTextBox class="form-control" />
+                 
+                </div>
+
+                <div class="row mb-1">
+                    <RadzenLabel Text="State" class="text-start " />
+                        <RadzenTextBox class="form-control" />
+                  
+                </div>
+                <div class="row mb-1">
+                    <RadzenLabel Text="ZipCode" class="text-start " />
+                        <RadzenTextBox Placeholder="Enter " class="form-control" />
+                  
+                </div>
+                <div class="row mb-1">
+                    <RadzenLabel Text="Country" class="text-start " />
+                        <RadzenTextBox class="form-control" />
+                   
+                </div>
+
+                <div class="row mb-1">
+                    <RadzenLabel Text="Status" class="text-start " />
+                        <RadzenDropDown TValue="Status" AllowClear=true Multiple=false Data="@Statuses" class="form-control" />
+                  
+                </div>
+                <div class="row mb-1">
+                    <RadzenLabel Text="Record Count" class="text-start " />
+                   <RadzenTextBox class="form-control mb-1" />
+                   
+                </div>
+                <div class="row mb-1">
+                    <div class="col-1">
+
+                     <RadzenCheckBox TValue="bool"/>
+                    </div>
+                    <div class="col-10">
+
+                     <RadzenLabel Text="Search MDM"  />
+                    </div>
+
+                </div>
+                <div class="row mb-1">
+                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Gap="1rem" Wrap="FlexWrap.NoWrap" >
+                        <RadzenButton Icon="search" Text="Search" ButtonStyle="ButtonStyle.Success" />
+                        <RadzenButton Icon="cancel" Text="Clear" ButtonStyle="ButtonStyle.Light" />
+                    </RadzenStack>
+
+                </div>
+            </div>
+           
+        </div>
+    </ChildContent>
+</RadzenContent>
+
+@code {
+    IEnumerable<Status> Statuses = Enumerable.Empty<Status>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToList();
+
+        await base.OnInitializedAsync();
+    }
+}

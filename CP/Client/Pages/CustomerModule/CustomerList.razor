@@ -7,11 +7,15 @@
     <RadzenSelectBar @bind-Value="@Density" TextProperty="Text" ValueProperty="Value"
                      Data="@(Enum.GetValues(typeof(Density)).Cast<Density>().Select(t => new { Text = $"{t}", Value = t }))" Size="ButtonSize.Small" />
 </RadzenCard>
-<RadzenDataGrid Data="@Customers" TItem="Customer" FilterMode="FilterMode.Simple" Density="@Density"
-                AllowPaging="true" AllowSorting="true"
-                AllowGrouping="false" AllowVirtualization="false" AllowColumnResize="true" AllowColumnReorder="true"
-                AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                PagerHorizontalAlign="HorizontalAlign.Center" ShowPagingSummary="true" AllowColumnPicking="false" PageSizeOptions="@pageSizeOptions" IsLoading=@isLoading>
+<RadzenDataGrid Data="@Customers" TItem="Customer" FilterMode="FilterMode.Advanced" AllowColumnResize="true" 
+                LogicalFilterOperator="LogicalFilterOperator.And" EditMode="DataGridEditMode.Single" 
+                VirtualizationOverscanCount=15
+                AllowPaging="false" AllowSorting="true"
+                AllowGrouping="true" AllowVirtualization="false" AllowColumnReorder="true" 
+                PageSizeOptions="@pageSizeOptions"
+                AllowColumnPicking="true"
+                AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" class="table-vertical-scrollbar"
+               ShowPagingSummary="false" SelectionMode="DataGridSelectionMode.Multiple">
     <Columns>
         <RadzenDataGridColumn TItem="Customer" Property="Id" Title="Id" />
         <RadzenDataGridColumn TItem="Customer" Property="FirstName" Title="FirstName" />

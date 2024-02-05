@@ -1,97 +1,130 @@
 ﻿@page "/requests"
-
+@inject DialogService DialogService
 
 @inject HttpClient Http
-<RadzenCard class="my-4" style="display: flex; align-items: center; gap: 0.5rem">
-    <div style="white-space:nowrap; margin-right: 16px">Density:</div>
-    <RadzenSelectBar @bind-Value="@Density" TextProperty="Text" ValueProperty="Value"
-                     Data="@(Enum.GetValues(typeof(Density)).Cast<Density>().Select(t => new { Text = $"{t}", Value = t }))" Size="ButtonSize.Small" />
+<RadzenHeading Size="H2" Text="Customer Requests" />
+<RadzenCard >
+    <RadzenRow>
+        <RadzenColumn Size="8">
+          
+            <RadzenSelectBar @bind-Value="@Density" TextProperty="Text" ValueProperty="Value"
+                             Data="@(Enum.GetValues(typeof(Density)).Cast<Density>().Select(t => new { Text = $"{t}", Value = t }))" Size="ButtonSize.Small" />
+        </RadzenColumn>
+        <RadzenColumn Size="4">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.End" Gap="0.5rem" Wrap="FlexWrap.NoWrap">
+                <RadzenButton  Variant=Variant.Outlined  Text="My Request" ButtonStyle="ButtonStyle.Primary"  />
+                <RadzenButton Variant=Variant.Outlined Text="Load All" ButtonStyle="ButtonStyle.Secondary" />
+                <RadzenButton Variant=Variant.Outlined Text="New Request" ButtonStyle="ButtonStyle.Dark" />
+              
+            </RadzenStack>
+        </RadzenColumn>
+
+    </RadzenRow>
 </RadzenCard>
-<RadzenDataGrid Data="@RequestsList" AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" 
-    FilterMode="FilterMode.Advanced" AllowSorting="true" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                TItem="CustomerRequestModel" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" PageSizeOptions="@pageSizeOptions" IsLoading=@isLoading
-        LoadData="Getdata" Count="100"
-                Density="@Density">
-    <Columns>
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="MDMId" Title="MDMId" Frozen="true" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="GUID" Title="GUID" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Action" Title="Action" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Title" Title="Title"  />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="RequestType" Title="RequestType" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ChangeType" Title="ChangeType" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="FEID" Title="FEID" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleSoldTo" Title="OracleSoldTo" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleSiteId" Title="OracleSiteId" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="MSABranchCode" Title="MSABranchCode" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ActualAmountRequested" Title="ActualAmountRequested" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="AfterMarketSalesOrder" Title="AfterMarketSalesOrder" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="SameDayDelivery" Title="SameDayDelivery" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="KrackCIA" Title="KrackCIA" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PaymentTerm" Title="PaymentTerm" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Category" Title="Category" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CustomerClass" Title="CustomerClass" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TaxStatus" Title="TaxStatus" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TaxCalculation" Title="TaxCalculation" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Comments" Title="Comments" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCustomerName" Title="BillToCustomerName" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToAddressLine1" Title="BillToAddressLine1" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToAddressLine2" Title="BillToAddressLine2" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToAddressLine3" Title="BillToAddressLine3" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCity" Title="BillToCity" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCounty" Title="BillToCounty" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToState" Title="BillToState" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToZip" Title="BillToZip" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToProvince" Title="BillToProvince" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCountry" Title="BillToCountry" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToContactName" Title="BillToContactName" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToEmail" Title="BillToEmail" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToPhoneNumber" Title="BillToPhoneNumber" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceDeliveryEmail" Title="InvoiceDeliveryEmail" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TaxCode" Title="TaxCode" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceCommunication" Title="InvoiceCommunication" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceTemplate" Title="InvoiceTemplate" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CreditRepresentative" Title="CreditRepresentative" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceDeliveryMethods" Title="InvoiceDeliveryMethods" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="MajMinBranches" Title="MajMinBranches" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="NotifyTo" Title="NotifyTo" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BSSNo" Title="BSSNo" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BSSShortName" Title="BSSShortName" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleCustNo" Title="OracleCustNo" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleBillToSite" Title="OracleBillToSite" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CustomerType" Title="CustomerType" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="AssigningOrganization" Title="AssigningOrganization" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Tolerance" Title="Tolerance" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Currency" Title="Currency" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OrderLimit" Title="OrderLimit" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Company" Title="Company" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CrossReferenceType" Title="CrossReferenceType" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CustomerSiteType" Title="CustomerSiteType" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CreatedBy" Title="CreatedBy" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CreatedOn" Title="CreatedOn" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ModifiedBy" Title="ModifiedBy" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ModifiedOn" Title="ModifiedOn" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ReviewedBy" Title="ReviewedBy" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ReviewAction" Title="ReviewAction" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Status" Title="Status" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Systems" Title="Systems" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="SubmittedToWF" Title="SubmittedToWF" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="AddressTypeCode" Title="AddressTypeCode" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="DataSource" Title="DataSource" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PublishORAStatus" Title="PublishORAStatus" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PublishCEStatus" Title="PublishCEStatus" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PublishBSSStatus" Title="PublishBSSStatus" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="StoreMainOffice" Title="StoreMainOffice" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="SpecialInstructions" Title="SpecialInstructions" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ModemNumber" Title="ModemNumber" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ServiceCenter" Title="ServiceCenter" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ServicePriority" Title="ServicePriority" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ServiceRespTime" Title="ServiceRespTime" />
-        <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TelephoneRespTime" Title="TelephoneRespTime" />
-    
-    </Columns>
+<br />
+<br/>
+<RadzenRow Gap="0rem" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Normal">
+    <RadzenColumn Size="12">
+     
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem">
+
+        <RadzenDataGrid Data="@RequestsList" AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false"
+                        FilterMode="FilterMode.Advanced" AllowSorting="true" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="false"
+                        TItem="CustomerRequestModel" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" PageSizeOptions="@pageSizeOptions" IsLoading=@isLoading
+                        LoadData="Getdata" Count="100" AllowVirtualization=true
+                        AllowColumnPicking=true AllowGrouping=true Density="@Density">
+            <Columns>
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="MDMId" Title="MDMId" Frozen="true" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="GUID" Title="GUID" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Action" Title="Action" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Title" Title="Title" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="RequestType" Title="RequestType" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ChangeType" Title="ChangeType" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="FEID" Title="FEID" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleSoldTo" Title="OracleSoldTo" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleSiteId" Title="OracleSiteId" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="MSABranchCode" Title="MSABranchCode" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ActualAmountRequested" Title="ActualAmountRequested" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="AfterMarketSalesOrder" Title="AfterMarketSalesOrder" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="SameDayDelivery" Title="SameDayDelivery" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="KrackCIA" Title="KrackCIA" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PaymentTerm" Title="PaymentTerm" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Category" Title="Category" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CustomerClass" Title="CustomerClass" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TaxStatus" Title="TaxStatus" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TaxCalculation" Title="TaxCalculation" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Comments" Title="Comments" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCustomerName" Title="BillToCustomerName" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToAddressLine1" Title="BillToAddressLine1" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToAddressLine2" Title="BillToAddressLine2" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToAddressLine3" Title="BillToAddressLine3" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCity" Title="BillToCity" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCounty" Title="BillToCounty" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToState" Title="BillToState" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToZip" Title="BillToZip" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToProvince" Title="BillToProvince" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToCountry" Title="BillToCountry" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToContactName" Title="BillToContactName" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToEmail" Title="BillToEmail" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BillToPhoneNumber" Title="BillToPhoneNumber" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceDeliveryEmail" Title="InvoiceDeliveryEmail" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TaxCode" Title="TaxCode" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceCommunication" Title="InvoiceCommunication" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceTemplate" Title="InvoiceTemplate" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CreditRepresentative" Title="CreditRepresentative" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="InvoiceDeliveryMethods" Title="InvoiceDeliveryMethods" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="MajMinBranches" Title="MajMinBranches" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="NotifyTo" Title="NotifyTo" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BSSNo" Title="BSSNo" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="BSSShortName" Title="BSSShortName" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleCustNo" Title="OracleCustNo" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OracleBillToSite" Title="OracleBillToSite" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CustomerType" Title="CustomerType" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="AssigningOrganization" Title="AssigningOrganization" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Tolerance" Title="Tolerance" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Currency" Title="Currency" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="OrderLimit" Title="OrderLimit" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Company" Title="Company" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CrossReferenceType" Title="CrossReferenceType" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CustomerSiteType" Title="CustomerSiteType" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CreatedBy" Title="CreatedBy" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="CreatedOn" Title="CreatedOn" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ModifiedBy" Title="ModifiedBy" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ModifiedOn" Title="ModifiedOn" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ReviewedBy" Title="ReviewedBy" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ReviewAction" Title="ReviewAction" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Status" Title="Status" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="Systems" Title="Systems" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="SubmittedToWF" Title="SubmittedToWF" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="AddressTypeCode" Title="AddressTypeCode" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="DataSource" Title="DataSource" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PublishORAStatus" Title="PublishORAStatus" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PublishCEStatus" Title="PublishCEStatus" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="PublishBSSStatus" Title="PublishBSSStatus" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="StoreMainOffice" Title="StoreMainOffice" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="SpecialInstructions" Title="SpecialInstructions" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ModemNumber" Title="ModemNumber" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ServiceCenter" Title="ServiceCenter" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ServicePriority" Title="ServicePriority" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="ServiceRespTime" Title="ServiceRespTime" />
+                <RadzenDataGridColumn TItem="CustomerRequestModel" Property="TelephoneRespTime" Title="TelephoneRespTime" />
+
+            </Columns>
 
 
-</RadzenDataGrid>
+        </RadzenDataGrid>
+        <RadzenStack Orientation="Orientation.Vertical" AlignItems="AlignItems.Center" Gap="1rem" Wrap="FlexWrap.Wrap">
+            <RadzenButton Icon="search" ButtonStyle="ButtonStyle.Primary" Click="@OpenSideDialog" />
+            <RadzenButton Icon="autorenew" ButtonStyle="ButtonStyle.Secondary" />
+            <RadzenButton Icon="settings" ButtonStyle="ButtonStyle.Dark" />
+            <RadzenButton Icon="description" ButtonStyle="ButtonStyle.Info" />
+        </RadzenStack>
+        </RadzenStack>
+    </RadzenColumn>
+   @*  <RadzenColumn Size="1">
+    </RadzenColumn> *@
+</RadzenRow>
+
 
 @code {
     Density Density = Density.Default;
@@ -130,7 +163,7 @@
     async Task Fetchdata(PagingParameters pagingParameters)
     {
 
-       await  ShowLoading();
+        await  ShowLoading();
         pagingParameters ??= new PagingParameters();
 
         string jsonData = JsonConvert.SerializeObject(pagingParameters);
@@ -145,8 +178,20 @@
 
             RequestsList = JsonConvert.DeserializeObject<IEnumerable<CustomerRequestModel>>(responseData);
         }
-       
-    }
 
+    }
+    async Task OpenSideDialog()
+    {
+        try
+        {
+            await DialogService.OpenSideAsync<SearchDialog>("Search Customer Request", options: new SideDialogOptions {  Position = DialogPosition.Right});
+
+        }
+        catch (Exception ex)
+        {
+            
+            throw;
+        }
+    }
 
 }
